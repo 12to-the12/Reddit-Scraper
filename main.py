@@ -26,10 +26,13 @@ print(f"{file_name = }")
 
 file_path = path + '\\' + file_name
 
+if os.path.isfile("./config/spicy_meme_roundup_uuid_and_cookie.json"):
+    os.remove("./config/spicy_meme_roundup_uuid_and_cookie.json")
+    print('removed')
 from instabot import Bot
 
 bot = Bot()
-bot.login(username="spicy_meme_roundup", password="xfwSbP7PxxC9jZk", force=True)
+bot.login(username="spicy_meme_roundup", password="xfwSbP7PxxC9jZk")
 
 hashtags = ' #meme #memes #memesdaily #funny #funnymemes #cringeymemes\
  #shitmemes #ifunny #dankmemes #shitpost #cursedmeme #cursedimage #cringe\
@@ -45,6 +48,18 @@ import random
 
 caption = random.choice(captions) + hashtags
 
-bot.upload_photo(file_path, caption=caption)
+try:
+    bot.upload_photo(file_path, caption=caption)
+    with open('D:\Projects\Computer Science\Scripts\last_uploaded.txt', 'w') as f:
+        out = str(current)
+        f.write('0')
+        print('set the counter to zero')
+except:
+    with open('D:\Projects\Computer Science\Scripts\last_uploaded.txt', 'w') as f:
+        out = str(current)
+        f.write(out)
+        print('uploaded!')
+
+
 
 bot.logout()
